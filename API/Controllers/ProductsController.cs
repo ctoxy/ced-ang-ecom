@@ -12,30 +12,37 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductRepository _repo;
+        private readonly IGenericRepository<Product> _productsRepo;
+        private readonly IGenericRepository<ProductType> _productTypesRepo;
+        private readonly IGenericRepository<ProductBrand> _productBrandRepo;
 
-        public ProductsController(IProductRepository repo)
+        public ProductsController(
+            IGenericRepository<Product> productsRepo,
+            IGenericRepository<ProductBrand> productBrandRepo,
+            IGenericRepository<ProductType> productTypesRepo
+            )
         {
-            _repo = repo;
-
+            _productsRepo = productsRepo;
+            _productTypesRepo = productTypesRepo;
+            _productBrandRepo = productBrandRepo;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProducts()
         {
-            var products = await _repo.GetProductsAsync();
+            var products = await _productsRepo.ListAllAsync();
             return Ok(products);
         }
         [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
         {
-            var productBrands = await _repo.GetProductBrandsAsync();
+            var productBrands = await _productBrandRepo.ListAllAsync();
             return Ok(productBrands);
         }
         [HttpGet("types")]
         public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
         {
-            var productTypes = await _repo.GetProductTypesAsync();
+            var productTypes = await _productTypesRepo.ListAllAsync();
             return Ok(productTypes);
         }
 
@@ -43,7 +50,7 @@ namespace API.Controllers
 
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            return await _repo.GetProductById(id);
+            return await _productsRepo.GetByIdAsync(id);
         }
 
     }
