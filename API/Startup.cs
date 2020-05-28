@@ -1,3 +1,5 @@
+using API.Helpers;
+using AutoMapper;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
@@ -21,6 +23,8 @@ namespace API
         {   
             services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
             services.AddScoped<IProductRepository, ProductRepository>();
+            //appel de automapper pour transformer la response client issue de la base
+            services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
             //appel du service StoreContext action vers la base apinet db
             services.AddDbContext<StoreContext>(x =>
