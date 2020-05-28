@@ -42,6 +42,8 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            // servir les fichiers statique comme les images
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
