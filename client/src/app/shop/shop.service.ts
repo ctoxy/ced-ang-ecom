@@ -19,7 +19,7 @@ export class ShopService {
       params = params.append('brandId', brandId.toString())
     }
     if(typeId) {
-      params = params.append('typeId', brandId.toString())
+      params = params.append('typeId',typeId.toString())
     }
 
     return this.http.get<IPagination>(this.baseUrl + 'products?pageSize=50', {observe: 'response', params})
