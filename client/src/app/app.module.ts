@@ -21,7 +21,7 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
     HttpClientModule,
     BrowserAnimationsModule,
     CoreModule,
-    HomeModule
+    HomeModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi:true}
