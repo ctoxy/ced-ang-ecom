@@ -8,7 +8,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./test-error.component.scss']
 })
 export class TestErrorComponent implements OnInit {
-  baseUrl = environment.apiUrl
+  baseUrl = environment.apiUrl;
+  validationErrors:any;
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -41,6 +42,7 @@ export class TestErrorComponent implements OnInit {
       console.log(response);
     },error => {
       console.log(error);
+      this.validationErrors= error.errors;
     });
   }
 }
