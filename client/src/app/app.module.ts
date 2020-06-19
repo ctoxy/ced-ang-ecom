@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { ShopModule } from './shop/shop.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ShopModule } from './shop/shop.module';
     BrowserAnimationsModule,
     CoreModule,
     ShopModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
