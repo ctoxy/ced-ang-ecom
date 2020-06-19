@@ -20,8 +20,6 @@ import { HomeModule } from './home/home.module';
     HttpClientModule,
     BrowserAnimationsModule,
     CoreModule,
-    ShopModule,
-    SharedModule,
     HomeModule
   ],
   providers: [],
