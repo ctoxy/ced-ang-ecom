@@ -11,8 +11,8 @@ import { ShopParams } from '../shared/models/shopParams';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent implements OnInit {
-  /* mettre true si il y a un if dans le search*/ 
-  @ViewChild('search',{static: true}) searchTerm: ElementRef;
+  /* mettre true si il n y a pas  un ngif dans le search*/ 
+  @ViewChild('search',{static: false}) searchTerm: ElementRef;
   products: IProduct [];
   brands: IBrand[];
   types: IType[];
