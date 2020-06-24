@@ -13,6 +13,7 @@ namespace API.Extensions
         {
             services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IClientRepository, ClientRepository>();
             // permet la getion dans un tableau des erreurs position sous le services.AddControllers()
             services.Configure<ApiBehaviorOptions>(options => 
             {

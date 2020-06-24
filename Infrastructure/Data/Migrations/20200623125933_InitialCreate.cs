@@ -7,6 +7,35 @@ namespace Infrastructure.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Clients",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    N_Cpt = table.Column<string>(nullable: true),
+                    Dept = table.Column<string>(nullable: true),
+                    Champ3 = table.Column<int>(nullable: false),
+                    Nom_Client = table.Column<string>(nullable: true),
+                    Ad1 = table.Column<string>(nullable: true),
+                    Ad2 = table.Column<string>(nullable: true),
+                    Ad3 = table.Column<string>(nullable: true),
+                    Ad4 = table.Column<string>(nullable: true),
+                    Tel = table.Column<string>(nullable: true),
+                    Fax = table.Column<string>(nullable: true),
+                    Payeur = table.Column<string>(nullable: true),
+                    Code_postal = table.Column<string>(nullable: true),
+                    Pays = table.Column<string>(nullable: true),
+                    Statut = table.Column<int>(nullable: false),
+                    Clef_Recherche = table.Column<string>(nullable: true),
+                    N_Agrément = table.Column<string>(nullable: true),
+                    Info_Compl = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clients", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductBrands",
                 columns: table => new
                 {
@@ -40,7 +69,7 @@ namespace Infrastructure.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(maxLength: 100, nullable: false),
                     Description = table.Column<string>(maxLength: 180, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Price = table.Column<double>(type: "decimal(18,2)", nullable: false),
                     PictureUrl = table.Column<string>(nullable: false),
                     ProductTypeId = table.Column<int>(nullable: false),
                     ProductBrandId = table.Column<int>(nullable: false)
@@ -75,6 +104,9 @@ namespace Infrastructure.Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Clients");
+
             migrationBuilder.DropTable(
                 name: "Products");
 

@@ -54,6 +54,19 @@ namespace Infrastructure.Data
 
                     await context.SaveChangesAsync();
                 }
+                if(!context.Clients.Any())
+                {
+                    var clientsData = File.ReadAllText("../Infrastructure/Data/SeedData/clientsactia.json");
+
+                    var clients = JsonSerializer.Deserialize<List<Client>>(clientsData);
+
+                    foreach ( var item in clients)
+                    {
+                        context.Clients.Add(item);
+                    }
+
+                    await context.SaveChangesAsync();
+                }
             }
             catch (Exception ex)
             {
