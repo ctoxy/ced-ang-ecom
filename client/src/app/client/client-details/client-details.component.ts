@@ -25,7 +25,7 @@ export class ClientDetailsComponent implements OnInit {
     // le plus + permet de caster url le chiffre id qui est une string dans url
     this.clientService.getClient(+this.activatedRoute.snapshot.paramMap.get('id')).subscribe(client => {
       this.client = client;
-      this.bcService.set('@clientDetails', client.Nom_Client);
+      this.bcService.set('@clientDetails', client.nom_Client);
     }, error => {
       console.log(error);
     });
