@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { IBasket, IBasketItem, Basket } from '../shared/models/basket';
-import { map } from 'rxjs/internal/operators/map';
+import { map } from 'rxjs/operators';
 import { IProduct } from '../shared/models/product';
 
 @Injectable({
@@ -20,7 +20,8 @@ export class BasketService {
     return this.http.get(this.baseUrl + 'basket?id=' + id)
       .pipe(
         map((basket: IBasket) => {
-          this.basketSource.next(basket)
+          this.basketSource.next(basket);
+          console.log(this.getCurrentBasketValue());
         })
       )
   }
@@ -29,7 +30,6 @@ export class BasketService {
     return this.http.post(this.baseUrl + 'basket', basket).subscribe((response:IBasket)=> {
       this.basketSource.next(response);
       console.log('setBasket', response);
-      
     }, error => {
       console.log(error);
     })
@@ -44,8 +44,6 @@ export class BasketService {
     if (basket === null) {
       basket = this.createBasket();
     }
-    console.log(basket);
-    
     basket.items = this.addOrUpdateItem(basket.items, itemToAdd, quantity);
     this.setBasket(basket);
   }
