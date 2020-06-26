@@ -3,7 +3,7 @@ export interface IClient {
   N_Cpt: string;
   Dept: string;
   Champ3: number;
-  nom_Client: string;
+  Nom_Client: string;
   Ad1: string;
   Ad2: string;
   Ad3: string;
