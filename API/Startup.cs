@@ -47,6 +47,8 @@ namespace API
             });
             // appel de ApplicationServicesExtensions
             services.AddApplicationServices();
+            // appel de IdentityServiceExtensions
+            services.AddIdentityServices();
             // appel de SwaggerServiceExtension
             services.AddSwaggerDocumentation();
             // appel de cors pour accés api via navigateur
