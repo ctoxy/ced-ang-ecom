@@ -116,10 +116,9 @@ export class BasketService {
     this.http.delete(this.baseUrl + 'basket?id=' + basket.id).subscribe(() => {
       this.basketSource.next(null);
       this.basketTotalSource.next(null);
-      localStorage.removeItem('basket_id');      
+      localStorage.removeItem('basket_id');
     }, error => {
       console.log('deleteBasket',error);
-      
     })
   }
 }
