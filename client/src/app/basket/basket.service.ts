@@ -11,7 +11,7 @@ import { IProduct } from '../shared/models/product';
 })
 export class BasketService {
   baseUrl = environment.apiUrl;
-  private basketSource = new BehaviorSubject<IBasket>(null);  
+  private basketSource = new BehaviorSubject<IBasket>(null);
   basket$ = this.basketSource.asObservable();
   private basketTotalSource = new BehaviorSubject<IBasketTotals>(null);
   basketTotal$ = this.basketTotalSource.asObservable();
@@ -59,7 +59,7 @@ export class BasketService {
     }
     return items;
   }
-  
+
   createBasket(): IBasket {
     const basket = new Basket();
     localStorage.setItem('basket_id', basket.id);
