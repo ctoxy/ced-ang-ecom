@@ -3,4 +3,5 @@ bin
 // appsettings.json
 wwwroot
 *.db
+*.rdb
 Infrastructure/Data/SeedData/clientactia.json
