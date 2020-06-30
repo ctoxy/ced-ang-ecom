@@ -17,6 +17,9 @@ namespace API.Helpers
             CreateMap<Client, ClientToReturnDto>();
             //reverse map permet l update adresse
             CreateMap<Address, AddressDto>().ReverseMap();
+            CreateMap<CustomerBasketDto, CustomerBasket>();
+            CreateMap<BasketItemDto, BasketItem>();
+
         }
     }
 }
