@@ -48,7 +48,7 @@ namespace API
             // appel de ApplicationServicesExtensions
             services.AddApplicationServices();
             // appel de IdentityServiceExtensions
-            services.AddIdentityServices();
+            services.AddIdentityServices(_config);
             // appel de SwaggerServiceExtension
             services.AddSwaggerDocumentation();
             // appel de cors pour accés api via navigateur
@@ -75,7 +75,9 @@ namespace API
             app.UseStaticFiles();
             //appel du middleware CORS
             app.UseCors("CorsPolicy");
-
+            // appel de l authentification pour le token avant useAuthorization position importante
+            app.UseAuthentication();
+            
             app.UseAuthorization();
             
             // appel de swagger documentation
