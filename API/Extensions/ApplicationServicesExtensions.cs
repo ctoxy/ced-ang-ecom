@@ -2,6 +2,7 @@ using System.Linq;
 using API.Errors;
 using Core.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,6 +16,9 @@ namespace API.Extensions
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IClientRepository, ClientRepository>();
+
+            // appel du service token
+            services.AddScoped<ITokenService, TokenService>();
             // permet la getion dans un tableau des erreurs position sous le services.AddControllers()
             services.Configure<ApiBehaviorOptions>(options => 
             {

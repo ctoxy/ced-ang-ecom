@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using API.Dtos;
 using API.Errors;
 using Core.Entities.Identity;
+using Core.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,9 +12,13 @@ namespace API.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly ITokenService _tokenService;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public AccountController(UserManager<AppUser> userManager,
+             SignInManager<AppUser> signInManager,
+             ITokenService tokenService)
         {
+            _tokenService = tokenService;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -25,7 +30,7 @@ namespace API.Controllers
             {
                 return Unauthorized(new ApiResponse(401));
             }
-            var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password,false);
+            var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
             if (!result.Succeeded)
             {
                 return Unauthorized(new ApiResponse(401));
@@ -33,10 +38,10 @@ namespace API.Controllers
             return new UserDto
             {
                 Email = user.Email,
-                Token = "this will be a token",
+                Token = _tokenService.CreateToken(user),
                 DisplayName = user.DisplayName,
             };
-            
+
         }
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
@@ -57,7 +62,7 @@ namespace API.Controllers
             return new UserDto
             {
                 DisplayName = user.DisplayName,
-                Token = "this will be a token",
+                Token = _tokenService.CreateToken(user),
                 Email = user.Email,
             };
         }
