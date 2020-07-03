@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  validateEmailNotTaken(): AsyncValidatorFn{
+  validateEmailNotTaken(): AsyncValidatorFn {
     return control => {
       return timer(500).pipe(
         switchMap(() => {
@@ -51,11 +51,11 @@ export class RegisterComponent implements OnInit {
           }
           return this.accountService.checkEmailExists(control.value).pipe(
             map(res => {
-              return res ? {emailExist: true} : null;
+              return res ? { emailExists: true } : null;
             })
           );
         })
       );
-    }
+    };
   }
 }
