@@ -16,8 +16,7 @@ namespace Core.Entities.OrderAggregate
             DeliveryMethod = deliveryMethod;
             OrderItems = orderItems;
             Subtotal = subtotal;
-            Status = status;
-
+            
         }
 
         public string BuyerEmail { get; set; }
