@@ -19,6 +19,8 @@ namespace API.Extensions
 
             // appel du service token
             services.AddScoped<ITokenService, TokenService>();
+            // appel du service oder
+            services.AddScoped<IOrderService, OrderService>();
             // permet la getion dans un tableau des erreurs position sous le services.AddControllers()
             services.Configure<ApiBehaviorOptions>(options => 
             {
