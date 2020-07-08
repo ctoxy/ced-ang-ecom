@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Dtos;
@@ -34,6 +35,36 @@ namespace API.Controllers
             return Ok(order);
 
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IReadOnlyList<Order>>> CreateOrdersForUser()
+        {
+            var email = HttpContext.User.RetrivalEmailFromPrincipal();
+            
+            var orders = await _orderService.GetOrdersForUserAsync(email);            
+            
+            return Ok(orders);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IReadOnlyList<Order>>> CreateOrderByIdForUser(int id)
+        {
+            var email = HttpContext.User.RetrivalEmailFromPrincipal();
+            
+            var order = await _orderService.GetOrderByIdAsync(id, email);            
+            if (order == null)
+            {
+                return BadRequest(new ApiResponse(404));
+            }
+            
+            return Ok(order);
+        }
+
+        [HttpGet("deliveryMethods")]
+        public async Task<ActionResult<IReadOnlyList<DeliveryMethod>>> GetDeliveryMethods()
+        {            
+            return Ok(await _orderService.GetDeliveryMethodsAsync());
+        }
     }
-    
+
 }
