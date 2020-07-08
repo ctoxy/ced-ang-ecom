@@ -2,6 +2,7 @@ using API.Dtos;
 using AutoMapper;
 using Core.Entities;
 using Core.Entities.Identity;
+using Core.Entities.OrderAggregate;
 
 namespace API.Helpers
 {
@@ -15,12 +16,14 @@ namespace API.Helpers
                 .ForMember(d => d.PictureUrl, o =>o.MapFrom<ProductUrlResolver>());
 
             CreateMap<Client, ClientToReturnDto>();
-            //reverse map permet l update adresse
-            CreateMap<Address, AddressDto>().ReverseMap();
+            //reverse map permet l update adresse via entity
+            CreateMap<Core.Entities.Identity.Address, AddressDto>().ReverseMap();
             CreateMap<CustomerBasketDto, CustomerBasket>();
             CreateMap<BasketItemDto, BasketItem>();
 
             CreateMap<AddressDto, Core.Entities.OrderAggregate.Address>();
+            CreateMap<Order, OrderToReturnDto>();
+            CreateMap<OrderItem, OrderItemDto>();
 
         }
     }
