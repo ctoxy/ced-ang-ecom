@@ -1,7 +1,6 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BasketService } from './basket/basket.service';
 import { AccountService } from './account/account.service';
-
 
 @Component({
   selector: 'app-root',
@@ -9,13 +8,22 @@ import { AccountService } from './account/account.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'ecomCed';
+  title = 'Skinet';
 
-  constructor(private basketService: BasketService,
-                      private accountService: AccountService) {}
+  constructor(private basketService: BasketService, private accountService: AccountService) { }
+
   ngOnInit(): void {
     this.loadBasket();
     this.loadCurrentUser();
+  }
+
+  loadCurrentUser() {
+    const token = localStorage.getItem('token');
+    this.accountService.loadCurrentUser(token).subscribe(() => {
+      console.log('loaded user');
+    }, error => {
+      console.log(error);
+    });
   }
 
   loadBasket() {
@@ -27,16 +35,5 @@ export class AppComponent implements OnInit {
         console.log(error);
       });
     }
-  }
-
-  loadCurrentUser(){
-    const token = localStorage.getItem('token');
-    
-      this.accountService.loadCurrentUser(token).subscribe(() => {
-        console.log('loaded user');
-      }, error => {
-        console.log(error);
-      });
-    
   }
 }

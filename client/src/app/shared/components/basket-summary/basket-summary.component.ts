@@ -15,7 +15,6 @@ export class BasketSummaryComponent implements OnInit {
   @Output() remove: EventEmitter<IBasketItem> = new EventEmitter<IBasketItem>();
   @Input() isBasket = true;
   @Input() items: IBasketItem[] | IOrderItem[] = [];
-  // propriété pour changer le style css en fonction de la page
   @Input() isOrder = false;
 
   constructor() { }

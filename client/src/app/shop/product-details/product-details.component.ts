@@ -13,36 +13,39 @@ import { BasketService } from 'src/app/basket/basket.service';
 export class ProductDetailsComponent implements OnInit {
   product: IProduct;
   quantity = 1;
-  constructor(private shopService: ShopService,
-              private activatedRoute: ActivatedRoute,
-              private basketService: BasketService,
-              private bcService: BreadcrumbService) {
-                this.bcService.set('@productDetails', '');
-               }
 
-  ngOnInit(): void {
-    this.loadProduct();
+  constructor(private shopService: ShopService,
+              private activateRoute: ActivatedRoute,
+              private bcService: BreadcrumbService,
+              private basketService: BasketService) {
+    this.bcService.set('@productDetails', '');
   }
-  loadProduct(){
-    // le plus + permet de caster url le chiffre id qui est une string dans url
-    this.shopService.getProduct(+this.activatedRoute.snapshot.paramMap.get('id')).subscribe(product => {
-      this.product = product;
-      this.bcService.set('@productDetails', product.name);
-    }, error => {
-      console.log(error);
-    });
+
+  ngOnInit() {
+    this.loadProduct();
   }
 
   addItemToBasket() {
     this.basketService.addItemToBasket(this.product, this.quantity);
   }
+
   incrementQuantity() {
     this.quantity++;
   }
+
   decrementQuantity() {
-    if(this.quantity > 1) {
+    if (this.quantity > 1) {
       this.quantity--;
     }
+  }
+
+  loadProduct() {
+    this.shopService.getProduct(+this.activateRoute.snapshot.paramMap.get('id')).subscribe(product => {
+      this.product = product;
+      this.bcService.set('@productDetails', product.name);
+    }, error => {
+      console.log(error);
+    });
   }
 
 }

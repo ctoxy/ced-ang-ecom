@@ -9,10 +9,11 @@ import { Observable } from 'rxjs';
 })
 export class SectionHeaderComponent implements OnInit {
   breadcrumb$: Observable<any[]>;
+
   constructor(private bcService: BreadcrumbService) { }
 
-  ngOnInit(): void {
-    this.breadcrumb$ = this.bcService.breadcrumbs$
+  ngOnInit() {
+    this.breadcrumb$ = this.bcService.breadcrumbs$;
   }
 
 }
