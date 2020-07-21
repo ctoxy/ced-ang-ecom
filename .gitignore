@@ -5,3 +5,4 @@ wwwroot
 *.db
 *.rdb
 Infrastructure/Data/SeedData/clientactia.json
+API/appsettings.json
