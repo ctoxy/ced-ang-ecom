@@ -23,6 +23,8 @@ namespace API.Extensions
             services.AddScoped<ITokenService, TokenService>();
             // appel du service oder
             services.AddScoped<IOrderService, OrderService>();
+            // appel du service PAYMENT
+            services.AddScoped<IPaymentService, PaymentService>();
             // permet la getion dans un tableau des erreurs position sous le services.AddControllers()
             services.Configure<ApiBehaviorOptions>(options => 
             {
