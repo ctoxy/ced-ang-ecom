@@ -17,5 +17,10 @@ namespace Core.Entities
         public string Id { get; set; }
         // chaque nouveau panier est vide
         public List<BasketItem> Items { get; set; } = new List<BasketItem>();
+
+        //for payment
+        public int? DeliveryMethodId { get; set; }
+        public string ClientSecret { get; set; }
+        public string PaymentIntentId { get; set; }
     }
 }
