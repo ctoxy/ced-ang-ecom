@@ -24,6 +24,11 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
   cardExpiry: any;
   cardCvc: any;
   cardErrors: any;
+  cardHandler = this.onChange.bind(this);
+  loading = false;
+  cardNumberValid = false;
+  cardExpiryValid = false;
+  cardCvcValid = false;
 
   constructor(
     private basketService: BasketService,
@@ -37,18 +42,30 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
 
     this.cardNumber = elements.create('cardNumber');
     this.cardNumber.mount(this.cardNumberElement.nativeElement);
+    this.cardNumber.addEventListener('change', this.cardHandler);
 
     this.cardExpiry = elements.create('cardExpiry');
     this.cardExpiry.mount(this.cardExpiryElement.nativeElement);
+    this.cardExpiry.addEventListener('change', this.cardHandler);
 
     this.cardCvc = elements.create('cardCvc');
     this.cardCvc.mount(this.cardCvcElement.nativeElement);
+    this.cardCvc.addEventListener('change', this.cardHandler);
+
   }
 
   ngOnDestroy(){
     this.cardNumber.destroy();
     this.cardExpiry.destroy();
     this.cardCvc.destroy();
+  }
+
+  onChange({error}){
+    if (error) {
+      this.cardErrors = error.message;
+    } else {
+      this.cardErrors = null;
+    }
   }
 
   submitOrder() {
