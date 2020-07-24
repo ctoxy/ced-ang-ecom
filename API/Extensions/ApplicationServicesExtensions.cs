@@ -12,6 +12,8 @@ namespace API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            // cache des requete de la base vers redis pour faciliter les echanges
+            services.AddSingleton<IResponseCacheService, ResponseCacheService>();
             services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
             // utilisation de Unit of Work pour regrouper les repository en un seul
             services.AddScoped<IUnitOfWork, UnitOfWork>();
