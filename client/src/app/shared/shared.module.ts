@@ -6,7 +6,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PagingHeaderComponent } from './components/paging-header/paging-header.component';
 import { PagerComponent } from './components/pager/pager.component';
 import { OrderTotalsComponent } from './components/order-totals/order-totals.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TextInputComponent } from './components/text-input/text-input.component';
 import {CdkStepperModule} from '@angular/cdk/stepper';
 import { StepperComponent } from './components/stepper/stepper.component';
@@ -20,6 +20,7 @@ import { RouterModule } from '@angular/router';
     PaginationModule.forRoot(),
     CarouselModule.forRoot(),
     BsDropdownModule.forRoot(),
+    FormsModule,
     ReactiveFormsModule,
     CdkStepperModule,
     RouterModule
@@ -30,6 +31,7 @@ import { RouterModule } from '@angular/router';
     PagerComponent,
     CarouselModule,
     OrderTotalsComponent,
+    FormsModule,
     ReactiveFormsModule,
     BsDropdownModule,
     TextInputComponent,
