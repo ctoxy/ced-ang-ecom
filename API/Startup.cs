@@ -22,14 +22,9 @@ namespace API
         {
             _config = config;
         }
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {   
-            
-            //appel de automapper pour transformer la response client issue de la base
-            services.AddAutoMapper(typeof(MappingProfiles));
-            services.AddControllers();
-            
+        // for dev purpose
+        public void ConfigureDevelopmentServices(IServiceCollection services)
+        {
             //appel du service StoreContext action vers la base apinet db
             services.AddDbContext<StoreContext>(x =>
                  x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
@@ -39,6 +34,33 @@ namespace API
             {
                 x.UseSqlite(_config.GetConnectionString("IdentityConnection"));
             });
+
+            ConfigureServices(services);
+        }
+
+        // for prod purpose
+        public void ConfigureProductionServices(IServiceCollection services)
+        {
+            //appel du service StoreContext action vers la base apinet db
+            services.AddDbContext<StoreContext>(x =>
+                 x.UseMySql(_config.GetConnectionString("DefaultConnection")));
+            
+            //appel du service Identity pour la gestion de la base users login
+            services.AddDbContext<AppIdentityDbContext>(x =>
+            {
+                x.UseMySql(_config.GetConnectionString("IdentityConnection"));
+            });
+
+            ConfigureServices(services);
+        }
+        public void ConfigureServices(IServiceCollection services)
+        {   
+            
+            //appel de automapper pour transformer la response client issue de la base
+            services.AddAutoMapper(typeof(MappingProfiles));
+            services.AddControllers();
+            
+            
                  
             // appel de Redis for the basket
             services.AddSingleton<IConnectionMultiplexer>(c => {
