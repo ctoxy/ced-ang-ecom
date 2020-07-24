@@ -7,4 +7,5 @@ wwwroot
 Infrastructure/Data/SeedData/clientactia.json
 API/appsettings.json
 
+**/appsettings.json
 API/appsettings.json
